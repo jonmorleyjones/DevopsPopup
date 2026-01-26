@@ -1,0 +1,10 @@
+{
+    "organization": "your-organization",
+    "project": "your-project",
+    "personal_access_token": "your-pat-token",
+    "work_item_type": "Task",
+    "area_path": "your-project\\Area",
+    "iteration_path": "your-project\\Iteration",
+    "parent_id": null,
+    "hotkey": "<ctrl>+<shift>+t"
+}
