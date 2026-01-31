@@ -12,12 +12,41 @@ env/
 .venv/
 .env
 
+# .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.cache
+*.log
+.vs/
+*.nupkg
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+# .NET MAUI
+*.app
+*.ipa
+*.apk
+*.aab
+*.msix
+*.appxbundle
+
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*.DotSettings.user
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Rider
+.idea/
+
+# JetBrains Rider
+*.sln.iml

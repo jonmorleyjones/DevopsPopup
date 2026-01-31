@@ -1,0 +1,56 @@
+{
+  "id": "git-commit",
+  "name": "Quick Git Commit",
+  "description": "Stage all changes and create a commit",
+  "hotkey": {
+    "modifiers": ["Ctrl", "Shift"],
+    "key": "G"
+  },
+  "script": {
+    "type": "powershell",
+    "path": "git-commit.ps1",
+    "timeout": 60000
+  },
+  "ui": {
+    "title": "Quick Git Commit",
+    "subtitle": "Stage and commit changes",
+    "fields": [
+      {
+        "id": "message",
+        "type": "Text",
+        "label": "Commit Message",
+        "placeholder": "Enter commit message...",
+        "required": true,
+        "autofocus": true,
+        "validation": {
+          "minLength": 3,
+          "maxLength": 100
+        }
+      },
+      {
+        "id": "description",
+        "type": "Multiline",
+        "label": "Extended Description",
+        "placeholder": "Optional extended description...",
+        "rows": 3
+      },
+      {
+        "id": "stageAll",
+        "type": "Checkbox",
+        "label": "Stage all changes",
+        "default": true
+      },
+      {
+        "id": "push",
+        "type": "Checkbox",
+        "label": "Push after commit",
+        "default": false
+      }
+    ],
+    "buttons": {
+      "submit": { "label": "Commit" },
+      "cancel": { "label": "Cancel" }
+    }
+  },
+  "successMessage": "Changes committed successfully!"
+}

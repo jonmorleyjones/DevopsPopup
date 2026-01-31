@@ -1,0 +1,78 @@
+{
+  "id": "devops-ticket",
+  "name": "Create DevOps Ticket",
+  "description": "Quickly create an Azure DevOps work item",
+  "hotkey": {
+    "modifiers": ["Ctrl", "Shift"],
+    "key": "T"
+  },
+  "script": {
+    "type": "powershell",
+    "path": "create-devops-ticket.ps1",
+    "timeout": 30000
+  },
+  "ui": {
+    "title": "Create DevOps Ticket",
+    "subtitle": "Quick ticket creation",
+    "fields": [
+      {
+        "id": "title",
+        "type": "Text",
+        "label": "Title",
+        "placeholder": "Enter ticket title...",
+        "required": true,
+        "autofocus": true,
+        "validation": {
+          "minLength": 5,
+          "maxLength": 200
+        }
+      },
+      {
+        "id": "description",
+        "type": "Multiline",
+        "label": "Description",
+        "placeholder": "Enter description...",
+        "rows": 4,
+        "required": false
+      },
+      {
+        "id": "workItemType",
+        "type": "Dropdown",
+        "label": "Type",
+        "default": "Task",
+        "options": [
+          { "value": "Task", "label": "Task" },
+          { "value": "Bug", "label": "Bug" },
+          { "value": "User Story", "label": "User Story" },
+          { "value": "Feature", "label": "Feature" }
+        ]
+      },
+      {
+        "id": "priority",
+        "type": "Radio",
+        "label": "Priority",
+        "default": "2",
+        "options": [
+          { "value": "1", "label": "Critical" },
+          { "value": "2", "label": "High" },
+          { "value": "3", "label": "Medium" },
+          { "value": "4", "label": "Low" }
+        ]
+      },
+      {
+        "id": "assignToMe",
+        "type": "Checkbox",
+        "label": "Assign to me",
+        "default": true
+      }
+    ],
+    "buttons": {
+      "submit": { "label": "Create Ticket" },
+      "cancel": { "label": "Cancel" }
+    }
+  },
+  "successMessage": "Ticket created successfully!",
+  "onSuccess": {
+    "action": "close"
+  }
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ScriptLauncher.ViewModels"
+             x:Class="ScriptLauncher.Views.MainPage"
+             x:DataType="viewmodels:MainViewModel"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reload" Command="{Binding ReloadScriptsCommand}" IconImageSource="refresh.png"/>
+        <ToolbarItem Text="Folder" Command="{Binding OpenScriptsFolderCommand}" IconImageSource="folder.png"/>
+        <ToolbarItem Text="Minimize" Command="{Binding MinimizeToTrayCommand}" IconImageSource="minimize.png"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="16" RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Spacing="8" Margin="0,0,0,16">
+            <Label Text="Script Launcher"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+            <Label Text="Press a hotkey to launch a script"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Scripts List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Scripts}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedScript}">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="16">
+                    <Label Text="No scripts configured"
+                           FontSize="18"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                    <Button Text="Open Scripts Folder"
+                            Command="{Binding OpenScriptsFolderCommand}"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:MainViewModel">
+                    <Frame Margin="0,4" Padding="16" CornerRadius="8" BorderColor="LightGray">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=ShowScriptCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}"
+                                       TextColor="Gray"
+                                       FontSize="13"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="{StaticResource Primary}"
+                                   Padding="8,4"
+                                   CornerRadius="4"
+                                   VerticalOptions="Center">
+                                <Label Text="{Binding Hotkey.DisplayString}"
+                                       TextColor="White"
+                                       FontSize="12"
+                                       FontAttributes="Bold"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Status Bar -->
+        <Grid Grid.Row="2" Margin="0,16,0,0" ColumnDefinitions="*,Auto">
+            <Label Grid.Column="0"
+                   Text="{Binding StatusMessage}"
+                   TextColor="Gray"
+                   VerticalOptions="Center"/>
+
+            <ActivityIndicator Grid.Column="1"
+                               IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource Primary}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

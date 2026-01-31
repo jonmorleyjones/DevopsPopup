@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Entry Styles -->
+    <Style TargetType="Entry">
+        <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray400}"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+    </Style>
+
+    <!-- Editor Styles -->
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray400}"/>
+    </Style>
+
+    <!-- Label Styles -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Button Styles -->
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Gray300}"/>
+                            <Setter Property="TextColor" Value="{StaticResource Gray500}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!-- Frame Styles -->
+    <Style TargetType="Frame">
+        <Setter Property="BorderColor" Value="{StaticResource Gray200}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="HasShadow" Value="False"/>
+    </Style>
+
+    <!-- Picker Styles -->
+    <Style TargetType="Picker">
+        <Setter Property="TextColor" Value="{StaticResource Gray600}"/>
+        <Setter Property="TitleColor" Value="{StaticResource Gray400}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <!-- Page Styles -->
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
+    </Style>
+
+    <!-- NavigationPage Styles -->
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="BarTextColor" Value="{StaticResource White}"/>
+    </Style>
+
+</ResourceDictionary>

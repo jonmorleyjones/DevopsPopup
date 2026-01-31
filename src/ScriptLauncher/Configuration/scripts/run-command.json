@@ -1,0 +1,44 @@
+{
+  "id": "run-command",
+  "name": "Run Custom Command",
+  "description": "Execute a custom shell command",
+  "hotkey": {
+    "modifiers": ["Ctrl", "Shift"],
+    "key": "R"
+  },
+  "script": {
+    "type": "powershell",
+    "path": "run-command.ps1",
+    "timeout": 120000
+  },
+  "ui": {
+    "title": "Run Command",
+    "fields": [
+      {
+        "id": "command",
+        "type": "Text",
+        "label": "Command",
+        "placeholder": "Enter command to run...",
+        "required": true,
+        "autofocus": true
+      },
+      {
+        "id": "workingDirectory",
+        "type": "Text",
+        "label": "Working Directory",
+        "placeholder": "Optional: C:\\path\\to\\directory"
+      },
+      {
+        "id": "elevated",
+        "type": "Checkbox",
+        "label": "Run as Administrator",
+        "default": false
+      }
+    ],
+    "buttons": {
+      "submit": { "label": "Run" },
+      "cancel": { "label": "Cancel" }
+    }
+  },
+  "successMessage": "Command executed!"
+}
