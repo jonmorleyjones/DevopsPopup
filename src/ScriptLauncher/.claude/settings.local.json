@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(dir /s /b \"C:\\\\temp\\\\DevopsPopup\\\\src\\\\ScriptLauncher\\\\Resources\")",
+      "Bash(dotnet run:*)",
+      "Bash(\"C:\\\\temp\\\\DevopsPopup\\\\src\\\\ScriptLauncher\\\\bin\\\\Debug\\\\net8.0-windows10.0.19041.0\\\\win10-x64\\\\ScriptLauncher.exe\")",
+      "Bash(cmd.exe:*)",
+      "Bash(tasklist:*)",
+      "Bash(./ScriptLauncher.exe)",
+      "Bash(echo:*)",
+      "Bash(powershell:*)",
+      "Bash(\"C:\\\\temp\\\\DevopsPopup\\\\src\\\\ScriptLauncher\\\\bin\\\\Debug\\\\net8.0-windows10.0.19041.0\\\\ScriptLauncher.exe\")",
+      "Bash(taskkill:*)"
+    ]
+  }
+}

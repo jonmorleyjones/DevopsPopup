@@ -6,6 +6,7 @@ A popup application for quickly creating Azure DevOps work items via hotkey.
 
 import json
 import base64
+import sys
 import threading
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -13,6 +14,10 @@ from pathlib import Path
 
 import requests
 from pynput import keyboard
+
+# Windows API imports for focus management
+if sys.platform == 'win32':
+    import ctypes
 
 
 class Config:
@@ -129,13 +134,16 @@ class DevOpsPopup:
         self.is_visible = True
 
         # Window setup - centered popup
-        window_width = 500
-        window_height = 350
+        window_width = 550
+        window_height = 450
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         x = (screen_width - window_width) // 2
         y = (screen_height - window_height) // 2
         self.root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
+        # Ensure window is mapped before focus operations
+        self.root.update_idletasks()
 
         # Keep on top and remove decorations for cleaner look
         self.root.attributes('-topmost', True)
@@ -169,7 +177,9 @@ class DevOpsPopup:
         ttk.Label(title_frame, text="Title:").pack(anchor=tk.W)
         self.title_entry = ttk.Entry(title_frame, font=('Segoe UI', 10))
         self.title_entry.pack(fill=tk.X, pady=(5, 0))
-        self.title_entry.focus()
+
+        # Schedule focus after window is fully initialized (150ms delay for Windows)
+        self.root.after(150, self._set_initial_focus)
 
         # Description field
         desc_frame = ttk.Frame(main_frame)
@@ -263,6 +273,26 @@ class DevOpsPopup:
         self.status_label.configure(text="", foreground='gray')
         self.create_btn.configure(state='normal')
         self.title_entry.focus()
+
+    def _set_initial_focus(self):
+        """Set initial focus to title field after window is ready."""
+        self.root.update_idletasks()
+        self.root.deiconify()
+        self.root.lift()
+
+        # On Windows, use the Windows API to force foreground
+        if sys.platform == 'win32':
+            try:
+                hwnd = ctypes.windll.user32.GetParent(self.root.winfo_id())
+                ctypes.windll.user32.SetForegroundWindow(hwnd)
+            except Exception:
+                pass
+
+        self.root.focus_force()
+        self.title_entry.focus_set()
+
+        # Schedule a retry in case the first attempt didn't work
+        self.root.after(50, lambda: self.title_entry.focus_set())
 
     def cancel(self):
         """Close the popup window."""

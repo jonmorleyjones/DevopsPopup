@@ -5,34 +5,42 @@ namespace ScriptLauncher;
 
 public partial class App : Application
 {
-    private readonly IHotkeyService _hotkeyService;
-    private readonly IWindowService _windowService;
+    private IHotkeyService? _hotkeyService;
+    private IWindowService? _windowService;
 
     public App(
         IHotkeyService hotkeyService,
-        IWindowService windowService,
-        MainPage mainPage)
+        IWindowService windowService)
     {
         InitializeComponent();
 
         _hotkeyService = hotkeyService;
         _windowService = windowService;
+    }
 
-        // Subscribe to hotkey events
-        _hotkeyService.HotkeyPressed += OnHotkeyPressed;
+    protected override void OnStart()
+    {
+        base.OnStart();
 
-        // Set the main page
-        MainPage = new NavigationPage(mainPage);
+        // Subscribe to hotkey events after app has started
+        if (_hotkeyService != null)
+        {
+            _hotkeyService.HotkeyPressed += OnHotkeyPressed;
+        }
     }
 
     private void OnHotkeyPressed(object? sender, HotkeyEventArgs e)
     {
         // Show the popup for the triggered script
-        _windowService.ShowPopupAsync(e.ScriptId);
+        _windowService?.ShowPopupAsync(e.ScriptId);
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
+        // Resolve MainPage here after resources are loaded
+        var mainPage = Handler.MauiContext.Services.GetRequiredService<MainPage>();
+        MainPage = new NavigationPage(mainPage);
+
         var window = base.CreateWindow(activationState);
 
         window.Title = "Script Launcher";
@@ -60,8 +68,11 @@ public partial class App : Application
 
     protected override void CleanUp()
     {
-        _hotkeyService.HotkeyPressed -= OnHotkeyPressed;
-        _hotkeyService.Dispose();
+        if (_hotkeyService != null)
+        {
+            _hotkeyService.HotkeyPressed -= OnHotkeyPressed;
+            _hotkeyService.Dispose();
+        }
         base.CleanUp();
     }
 }

@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:ScriptLauncher.ViewModels"
+             xmlns:models="clr-namespace:ScriptLauncher.Models"
              x:Class="ScriptLauncher.Views.MainPage"
              x:DataType="viewmodels:MainViewModel"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Reload" Command="{Binding ReloadScriptsCommand}" IconImageSource="refresh.png"/>
-        <ToolbarItem Text="Folder" Command="{Binding OpenScriptsFolderCommand}" IconImageSource="folder.png"/>
-        <ToolbarItem Text="Minimize" Command="{Binding MinimizeToTrayCommand}" IconImageSource="minimize.png"/>
+        <ToolbarItem Text="Reload" Command="{Binding ReloadScriptsCommand}"/>
+        <ToolbarItem Text="Folder" Command="{Binding OpenScriptsFolderCommand}"/>
+        <ToolbarItem Text="Minimize" Command="{Binding MinimizeToTrayCommand}"/>
     </ContentPage.ToolbarItems>
 
     <Grid Padding="16" RowDefinitions="Auto,*,Auto">
@@ -42,7 +43,7 @@
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:MainViewModel">
+                <DataTemplate x:DataType="models:ScriptDefinition">
                     <Frame Margin="0,4" Padding="16" CornerRadius="8" BorderColor="LightGray">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer

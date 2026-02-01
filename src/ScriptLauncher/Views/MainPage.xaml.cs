@@ -19,3 +19,4 @@ public partial class MainPage : ContentPage
         await _viewModel.InitializeAsync();
     }
 }
+

@@ -152,7 +152,7 @@ public class ScriptExecutionService : IScriptExecutionService
             var escapedValue = EscapePowerShellValue(value);
             args.Append($" -{key} {escapedValue}");
         }
-
+        Console.WriteLine((executable, args.ToString()));
         return (executable, args.ToString());
     }
 
@@ -243,7 +243,7 @@ public class ScriptExecutionService : IScriptExecutionService
         // Handle relative paths
         if (!Path.IsPathRooted(path))
         {
-            var basePath = Path.Combine(FileSystem.AppDataDirectory, "scripts");
+            var basePath = Path.Combine(FileSystem.AppDataDirectory, "Configuration", "scripts");
             path = Path.Combine(basePath, path);
         }
 

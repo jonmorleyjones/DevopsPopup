@@ -5,10 +5,17 @@
              x:Class="ScriptLauncher.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            <!-- Colors -->
+            <Color x:Key="Primary">#512BD4</Color>
+            <Color x:Key="PrimaryDark">#3B1F9E</Color>
+            <Color x:Key="Secondary">#DFD8F7</Color>
+            <Color x:Key="White">#FFFFFF</Color>
+            <Color x:Key="Gray100">#F7F7F7</Color>
+            <Color x:Key="Gray200">#E5E5E5</Color>
+            <Color x:Key="Gray300">#CCCCCC</Color>
+            <Color x:Key="Gray400">#999999</Color>
+            <Color x:Key="Gray500">#666666</Color>
+            <Color x:Key="Gray600">#333333</Color>
 
             <!-- Converters -->
             <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>

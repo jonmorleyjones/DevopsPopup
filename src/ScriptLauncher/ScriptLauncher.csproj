@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0-windows10.0.19041.0;net8.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks>net9.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>ScriptLauncher</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -26,6 +26,7 @@
     <!-- Windows: Don't use packaged mode for easier development -->
     <WindowsPackageType>None</WindowsPackageType>
 
+
     <!-- macOS -->
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</TargetPlatformMinVersion>
@@ -46,24 +47,21 @@
 
     <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />
-
-    <!-- Styles -->
-    <MauiXaml Include="Resources\Styles\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- NuGet Packages -->
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.80" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.40" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
     <PackageReference Include="SharpHook" Version="5.3.7" />
   </ItemGroup>
 
   <!-- Windows-specific packages -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.1.0" />
+    <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0" />
   </ItemGroup>
 
   <!-- Configuration files -->
